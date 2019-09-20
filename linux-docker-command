@@ -1,0 +1,287 @@
+Microsoft Windows [Version 10.0.17763.107]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>ssh -i Ratnesh-AWS-training.pem ec2-user@54.254.164.156
+Warning: Identity file Ratnesh-AWS-training.pem not accessible: No such file or directory.
+The authenticity of host '54.254.164.156 (54.254.164.156)' can't be established.
+ECDSA key fingerprint is SHA256:cPf6v/OncWGaW0wn7rFMGtjU7zNrb7Tss+TCMQFhkPY.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '54.254.164.156' (ECDSA) to the list of known hosts.
+ec2-user@54.254.164.156: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+
+C:\Windows\system32>cd C:\Users\Admin\Downloads
+
+C:\Users\Admin\Downloads>ssh -i Ratnesh-AWS-training.pem ec2-user@54.254.164.156
+
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+7 package(s) needed for security, out of 10 available
+Run "sudo yum update" to apply all updates.
+[ec2-user@ip-172-31-5-173 ~]$ sudo su
+[root@ip-172-31-5-173 ec2-user]# yum install docker
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                                       | 2.4 kB  00:00:00
+Resolving Dependencies
+--> Running transaction check
+---> Package docker.x86_64 0:18.06.1ce-10.amzn2 will be installed
+--> Processing Dependency: pigz for package: docker-18.06.1ce-10.amzn2.x86_64
+--> Processing Dependency: libcgroup for package: docker-18.06.1ce-10.amzn2.x86_64
+--> Processing Dependency: libltdl.so.7()(64bit) for package: docker-18.06.1ce-10.amzn2.x86_64
+--> Running transaction check
+---> Package libcgroup.x86_64 0:0.41-15.amzn2 will be installed
+---> Package libtool-ltdl.x86_64 0:2.4.2-22.2.amzn2.0.2 will be installed
+---> Package pigz.x86_64 0:2.3.4-1.amzn2.0.1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+======================================================================================================================== Package                   Arch                Version                             Repository                      Size
+========================================================================================================================Installing:
+ docker                    x86_64              18.06.1ce-10.amzn2                  amzn2extra-docker               37 M
+Installing for dependencies:
+ libcgroup                 x86_64              0.41-15.amzn2                       amzn2-core                      65 k
+ libtool-ltdl              x86_64              2.4.2-22.2.amzn2.0.2                amzn2-core                      49 k
+ pigz                      x86_64              2.3.4-1.amzn2.0.1                   amzn2-core                      81 k
+
+Transaction Summary
+========================================================================================================================Install  1 Package (+3 Dependent packages)
+
+Total download size: 37 M
+Installed size: 151 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/4): libcgroup-0.41-15.amzn2.x86_64.rpm                                                        |  65 kB  00:00:00
+(2/4): libtool-ltdl-2.4.2-22.2.amzn2.0.2.x86_64.rpm                                              |  49 kB  00:00:00
+(3/4): pigz-2.3.4-1.amzn2.0.1.x86_64.rpm                                                         |  81 kB  00:00:00
+(4/4): docker-18.06.1ce-10.amzn2.x86_64.rpm                                                      |  37 MB  00:00:00
+------------------------------------------------------------------------------------------------------------------------Total                                                                                    47 MB/s |  37 MB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libcgroup-0.41-15.amzn2.x86_64                                                                       1/4
+  Installing : libtool-ltdl-2.4.2-22.2.amzn2.0.2.x86_64                                                             2/4
+  Installing : pigz-2.3.4-1.amzn2.0.1.x86_64                                                                        3/4
+  Installing : docker-18.06.1ce-10.amzn2.x86_64                                                                     4/4
+  Verifying  : docker-18.06.1ce-10.amzn2.x86_64                                                                     1/4
+  Verifying  : pigz-2.3.4-1.amzn2.0.1.x86_64                                                                        2/4
+  Verifying  : libtool-ltdl-2.4.2-22.2.amzn2.0.2.x86_64                                                             3/4
+  Verifying  : libcgroup-0.41-15.amzn2.x86_64                                                                       4/4
+
+Installed:
+  docker.x86_64 0:18.06.1ce-10.amzn2
+
+Dependency Installed:
+  libcgroup.x86_64 0:0.41-15.amzn2    libtool-ltdl.x86_64 0:2.4.2-22.2.amzn2.0.2    pigz.x86_64 0:2.3.4-1.amzn2.0.1
+
+Complete!
+[root@ip-172-31-5-173 ec2-user]# service docker start
+Redirecting to /bin/systemctl start docker.service
+[root@ip-172-31-5-173 ec2-user]# service docker status
+Redirecting to /bin/systemctl status docker.service
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
+   Active: active (running) since Fri 2019-09-20 09:06:25 UTC; 1min 32s ago
+     Docs: https://docs.docker.com
+  Process: 492 ExecStartPre=/usr/libexec/docker/docker-setup-runtimes.sh (code=exited, status=0/SUCCESS)
+  Process: 456 ExecStartPre=/bin/mkdir -p /run/docker (code=exited, status=0/SUCCESS)
+ Main PID: 504 (dockerd)
+    Tasks: 18
+   Memory: 37.0M
+   CGroup: /system.slice/docker.service
+           ├─504 /usr/bin/dockerd --default-ulimit nofile=1024:4096
+           └─517 docker-containerd --config /var/run/docker/containerd/containerd.toml
+
+Sep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.486256610Z"...pcSep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.486948099Z"...pcSep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.487229174Z"...."Sep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.668652647Z"...s"Sep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.714661326Z"...."Sep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.734642895Z"...ceSep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.735074842Z"...n"Sep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.744132522Z"...H"Sep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal systemd[1]: Started Docker Application Container Engine.Sep 20 09:06:25 ip-172-31-5-173.ap-southeast-1.compute.internal dockerd[504]: time="2019-09-20T09:06:25.758252200Z"...k"Hint: Some lines were ellipsized, use -l to show in full.
+[root@ip-172-31-5-173 ec2-user]# docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+1b930d010525: Pull complete
+Digest: sha256:b8ba256769a0ac28dd126d584e0a2011cd2877f3f76e093a7ae560f2a5301c00
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+[root@ip-172-31-5-173 ec2-user]# docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+[root@ip-172-31-5-173 ec2-user]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              fce289e99eb9        8 months ago        1.84kB
+[root@ip-172-31-5-173 ec2-user]# mkdir dockertrng
+[root@ip-172-31-5-173 ec2-user]# ls -ltr
+total 0
+drwxr-xr-x 2 root root 6 Sep 20 09:22 dockertrng
+[root@ip-172-31-5-173 ec2-user]# ls
+dockertrng
+[root@ip-172-31-5-173 ec2-user]# ls -ltr
+total 0
+drwxr-xr-x 2 root root 6 Sep 20 09:22 dockertrng
+[root@ip-172-31-5-173 ec2-user]# cd dockertrng
+[root@ip-172-31-5-173 dockertrng]# vi app.py
+[root@ip-172-31-5-173 dockertrng]# vi app.py
+[root@ip-172-31-5-173 dockertrng]# chmod 755 app.py
+[root@ip-172-31-5-173 dockertrng]# vi Dockerfile.py
+[root@ip-172-31-5-173 dockertrng]# vi docker-compose.yml
+[root@ip-172-31-5-173 dockertrng]# ls -ltr
+total 8
+-rwxr-xr-x 1 root root 665 Sep 20 09:25 app.py
+-rw-r--r-- 1 root root 361 Sep 20 09:28 docker-compose.yml
+[root@ip-172-31-5-173 dockertrng]# vi Dockerfile
+[root@ip-172-31-5-173 dockertrng]# ls -ltr
+total 12
+-rwxr-xr-x 1 root root 665 Sep 20 09:25 app.py
+-rw-r--r-- 1 root root 361 Sep 20 09:28 docker-compose.yml
+-rw-r--r-- 1 root root 513 Sep 20 09:29 Dockerfile
+[root@ip-172-31-5-173 dockertrng]# vi requirements.txt
+[root@ip-172-31-5-173 dockertrng]# ls -ltr
+total 16
+-rwxr-xr-x 1 root root 665 Sep 20 09:25 app.py
+-rw-r--r-- 1 root root 361 Sep 20 09:28 docker-compose.yml
+-rw-r--r-- 1 root root 513 Sep 20 09:29 Dockerfile
+-rw-r--r-- 1 root root  12 Sep 20 09:30 requirements.txt
+[root@ip-172-31-5-173 dockertrng]# ls -lrt
+total 16
+-rwxr-xr-x 1 root root 665 Sep 20 09:25 app.py
+-rw-r--r-- 1 root root 361 Sep 20 09:28 docker-compose.yml
+-rw-r--r-- 1 root root 513 Sep 20 09:29 Dockerfile
+-rw-r--r-- 1 root root  12 Sep 20 09:30 requirements.txt
+[root@ip-172-31-5-173 dockertrng]# cat docker-compose.yml
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: username/repo:tag
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:80"
+    networks:
+      - webnet
+networks:
+  webnet:
+[root@ip-172-31-5-173 dockertrng]# chmod 755*
+chmod: missing operand after ‘755*’
+Try 'chmod --help' for more information.
+[root@ip-172-31-5-173 dockertrng]# chmod 755 *
+[root@ip-172-31-5-173 dockertrng]# docker build -t ratneshdockertrng .
+Sending build context to Docker daemon  6.144kB
+Step 1/7 : FROM python:2.7-slim
+2.7-slim: Pulling from library/python
+b8f262c62ec6: Pull complete
+8cbb51e0b077: Pull complete
+82627a456962: Pull complete
+33f3f5c560fe: Pull complete
+Digest: sha256:68bb099b780cf7aa60df3af68d573dc420907acfa54cbb2a53ade8886d965272
+Status: Downloaded newer image for python:2.7-slim
+ ---> f462855313cd
+Step 2/7 : WORKDIR /app
+ ---> Running in e10d22313a9b
+Removing intermediate container e10d22313a9b
+ ---> c46323e92860
+Step 3/7 : COPY . /app
+ ---> 876e4463b768
+Step 4/7 : RUN pip install --trusted-host pypi.python.org -r requirements.txt
+ ---> Running in 42136779d638
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+Collecting Flask (from -r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/9b/93/628509b8d5dc749656a9641f4caf13540e2cdec85276964ff8f43bbb1d3b/Flask-1.1.1-py2.py3-none-any.whl (94kB)
+Collecting Redis (from -r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/bd/64/b1e90af9bf0c7f6ef55e46b81ab527b33b785824d65300bb65636534b530/redis-3.3.8-py2.py3-none-any.whl (66kB)
+Collecting click>=5.1 (from Flask->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/fa/37/45185cb5abbc30d7257104c434fe0b07e5a195a6847506c074527aa599ec/Click-7.0-py2.py3-none-any.whl (81kB)
+Collecting Werkzeug>=0.15 (from Flask->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/ce/42/3aeda98f96e85fd26180534d36570e4d18108d62ae36f87694b476b83d6f/Werkzeug-0.16.0-py2.py3-none-any.whl (327kB)
+Collecting itsdangerous>=0.24 (from Flask->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/76/ae/44b03b253d6fade317f32c24d100b3b35c2239807046a4c953c7b89fa49e/itsdangerous-1.1.0-py2.py3-none-any.whl
+Collecting Jinja2>=2.10.1 (from Flask->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/1d/e7/fd8b501e7a6dfe492a433deb7b9d833d39ca74916fa8bc63dd1a4947a671/Jinja2-2.10.1-py2.py3-none-any.whl (124kB)
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.10.1->Flask->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/fb/40/f3adb7cf24a8012813c5edb20329eb22d5d8e2a0ecf73d21d6b85865da11/MarkupSafe-1.1.1-cp27-cp27mu-manylinux1_x86_64.whl
+Installing collected packages: click, Werkzeug, itsdangerous, MarkupSafe, Jinja2, Flask, Redis
+Successfully installed Flask-1.1.1 Jinja2-2.10.1 MarkupSafe-1.1.1 Redis-3.3.8 Werkzeug-0.16.0 click-7.0 itsdangerous-1.1.0
+Removing intermediate container 42136779d638
+ ---> d861bf66ed7c
+Step 5/7 : EXPOSE 80
+ ---> Running in 39cb028e5c3a
+Removing intermediate container 39cb028e5c3a
+ ---> a8c31c544e7a
+Step 6/7 : ENV NAME World
+ ---> Running in e7bf34b3f143
+Removing intermediate container e7bf34b3f143
+ ---> 64ec3444aa4b
+Step 7/7 : CMD ["python", "app.py"]
+ ---> Running in 8657997cd291
+Removing intermediate container 8657997cd291
+ ---> e5e714ed6840
+Successfully built e5e714ed6840
+Successfully tagged ratneshdockertrng:latest
+[root@ip-172-31-5-173 dockertrng]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+ratneshdockertrng   latest              e5e714ed6840        About a minute ago   148MB
+python              2.7-slim            f462855313cd        7 days ago           137MB
+hello-world         latest              fce289e99eb9        8 months ago         1.84kB
+[root@ip-172-31-5-173 dockertrng]# docker run -p 4000:80 ratneshdockertrng
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+136.232.224.94 - - [20/Sep/2019 09:42:51] "GET / HTTP/1.1" 200 -
+136.232.224.94 - - [20/Sep/2019 09:42:51] "GET /favicon.ico HTTP/1.1" 404 -
+^C[root@ip-172-31-5-173 dockertrng]# python app.py
+Traceback (most recent call last):
+  File "app.py", line 1, in <module>
+    from flask import Flask
+ImportError: No module named flask
+[root@ip-172-31-5-173 dockertrng]#
